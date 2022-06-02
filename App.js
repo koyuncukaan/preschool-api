@@ -11,7 +11,7 @@ const errorMiddleware = require("./middleware/error-handler");
 
 app.use(express.json());
 
-const players = require("./Routes/player");
+const players = require("./routes/player");
 
 app.use("/api/v1/players", players);
 
