@@ -1,0 +1,21 @@
+{
+  "name": "preschool-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "Kaan Koyuncu",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-async-errors": "^3.1.1",
+    "mongoose": "^6.3.5",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
