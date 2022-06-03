@@ -9,7 +9,8 @@ const createPlayer = async (req, res) => {
 
 const getAllPlayers = async (req, res) => {
   const players = await Player.find({});
-  res.status(200).json({ players });
+  //TODO: type checking relook
+  res.status(200).json(players);
 };
 
 const getPlayer = async (req, res, next) => {
