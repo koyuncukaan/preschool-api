@@ -1,5 +1,6 @@
 require("express-async-errors");
 require("dotenv").config();
+require("express-async-errors");
 
 const helmet = require("helmet");
 const cors = require("cors");
@@ -8,6 +9,8 @@ const rateLimiter = require("express-rate-limit");
 
 const express = require("express");
 const app = express();
+
+const morgan = require("morgan");
 
 const connectDB = require("./db/connect");
 
@@ -23,6 +26,7 @@ app.use(
     max: 100, // limit each IP to 100 requests per windowMs
   })
 );
+app.use(morgan("tiny"));
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
