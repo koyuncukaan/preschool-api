@@ -1,36 +1,37 @@
-const { createCustomError } = require("../errors/custom-error");
+const { StatusCodes } = require("http-status-codes");
+const CustomError = require("../errors");
 
 const Player = require("../models/player");
 
 const createPlayer = async (req, res) => {
   const player = await Player.create(req.body);
-  res.status(201).json({ player });
+  res.status(StatusCodes.CREATED).json({ player });
 };
 
 const getAllPlayers = async (req, res) => {
   const players = await Player.find({});
   //TODO: type checking relook
-  res.status(200).json(players);
+  res.status(StatusCodes.OK).json(players);
 };
 
 const getPlayer = async (req, res, next) => {
   const { id: playerID } = req.params;
   const player = await Player.findOne({ _id: playerID });
   if (!player) {
-    return next(createCustomError(`No player with id : ${playerID}`, 404));
+    throw new CustomError.NotFoundError(`No player with id : ${playerID}`);
   }
 
-  res.status(200).json({ player });
+  res.status(StatusCodes.OK).json({ player });
 };
 
 const deletePlayer = async (req, res, next) => {
   const { id: playerID } = req.params;
   const player = await Player.findOneAndDelete({ _id: playerID });
   if (!player) {
-    return next(createCustomError(`No player with id : ${playerID}`, 404));
+    throw new CustomError.NotFoundError(`No player with id : ${playerID}`);
   }
 
-  res.status(200).json({ player });
+  res.status(StatusCodes.OK).json({ player });
 };
 
 const updatePlayer = async (req, res, next) => {
@@ -42,10 +43,10 @@ const updatePlayer = async (req, res, next) => {
   });
 
   if (!player) {
-    return next(createCustomError(`No player with id : ${playerID}`, 404));
+    throw new CustomError.NotFoundError(`No player with id : ${playerID}`);
   }
 
-  res.status(200).json({ player });
+  res.status(StatusCodes.OK).json({ player });
 };
 
 module.exports = {
