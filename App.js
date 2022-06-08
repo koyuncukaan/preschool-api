@@ -18,8 +18,9 @@ const connectDB = require("./db/connect");
 
 //routers
 const authRouter = require("./routes/authRoutes");
+const userRouter = require("./routes/userRoutes");
 
-//middlewares
+//middleware
 const notFoundMiddleware = require("./middleware/not-found");
 const errorMiddleware = require("./middleware/error-handler");
 
@@ -40,12 +41,11 @@ app.use(cors());
 app.use(xss());
 
 app.get("/", (req, res) => {
-  // console.log(req.cookies);
-  console.log(req.signedCookies);
   res.send("preschool api");
 });
 app.use("/api/v1/players", players);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", userRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
